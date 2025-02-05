@@ -28,6 +28,7 @@ void initialize_game(void)
 
     strcpy(questions[1].category, "Programming");
     strcpy(questions[1].question, "Which language is known for web development alongside HTML and CSS?");
+    strcpy(questions[1].answer, "JavaScript");
     questions[1].value = 200;
     questions[1].answered = false;
 
