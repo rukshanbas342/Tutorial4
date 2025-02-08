@@ -25,4 +25,13 @@ extern bool player_exists(player *players, int num_players, char *name);
 // player given their name
 extern void update_score(player *players, int num_players, char *name, int score);
 
+// Parses a player's input string into name and score
+extern void parse_player_input(char *input, char *name, int *score);
+
+// Formats a player's name and score into a single string
+extern void format_player_output(player *p, char *output);
+
+// Displays all players and their scores
+extern void display_players(player *players, int num_players);
+
 #endif /* PLAYERS_H_ */
