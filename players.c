@@ -14,7 +14,7 @@
 bool player_exists(player *players, int num_players, char *name)
 {
     for (int i = 0; i < num_players; i++) {
-        if (strcm(players[i].name, name) == 0) { // strcmp() to compare names
+        if (strcmp(players[i].name, name) == 0) { // strcmp() to compare names
         return true;
 
         }
@@ -27,40 +27,50 @@ bool player_exists(player *players, int num_players, char *name)
 void update_score(player *players, int num_players, char *name, int score)
 { 
     for (int i = 0; i < num_players; i++) {
-        if (strcm(players[i].name, name) == 0) { // strcmp() to compare names
-    players[i].score += score;
-    return;
+        if (strcmp(players[i].name, name) == 0) { // strcmp() to compare names
+            players[i].score += score;
+            return; // Exit function after updating score
         } 
+    }
+    // If the function has not returned, the player was not found
+    printf("Player %s not found!\n", name);
 }
-printf("Player %s not found!\n", name);
-}
+
 
 // Splits a player input string into name and score using strtok()
-
 void parse_player_input(char *input, char *name, int *score) {
-    char *token = strtok(NULL, ",");
+    // Get first token (player name)
+    char *token = strtok(input, ",");
     if (token != NULL) {
-        if (token != NULL) {
-            strcpy(name, token);
-            token = strtok(NULL, ",");
-        }
+        strcpy(name, token);
+
+        // Get second token (score)
+        token = strtok(NULL, ",");
         if (token != NULL) {
             *score = atoi(token);
+        } else {
+            *score = 0; // Default to 0 if no score is provided
+            printf("Warning: No score found for player %s, defaulting to 0.\n", name);
         }
+    } else {
+        printf("Error: Invalid input format. Expected: \"Name,Score\"\n");
     }
 }
+
 // Combines a player's name and score into a single formatted string
 void format_player_output(player *p, char *output) {
-    sprintf(output, "%s: %d points", p->name, p->score);  // Use strcat() to append if needed
+    sprintf(output, "%s: %d points", p->name, p->score);
 }
-// Displays all players and their scores
+
+// Combines a player's name and score into a single formatted string
 void display_players(player *players, int num_players) {
     printf("\nJeopardy Players:\n");
     printf("-----------------\n");
     for (int i = 0; i < num_players; i++) {
-        if (strlen(players[i].name) > 0) {  // strlen() to check if name is valid
-            printf("%s: %d points\n", players[i].name, players[i].score);
-        }
+        char output[MAX_LEN];  // Buffer to store formatted string
+        format_player_output(&players[i], output);
+        printf("%s\n", output);
     }
     printf("-----------------\n");
 }
+

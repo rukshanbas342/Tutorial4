@@ -15,26 +15,27 @@
 // The number of questions, you can use this in your functions in
 // questions.c, this can be accessed in questions.c
 #define NUM_QUESTIONS 12
+#define MAX_ANSWERS 2
 
 // List of 3 categories as array of strings
 static char categories[NUM_CATEGORIES][MAX_LEN] = {
-    "programming", 
-    "algorithms", 
-    "databases"
+    "Programming", 
+    "Algorithms", 
+    "Databases"
 };
 
 // Questions struct for each question
 typedef struct {
     char category[MAX_LEN];
     char question[MAX_LEN];
-    char answer[MAX_LEN];
+    char answer[MAX_ANSWERS][MAX_LEN];
     int value;
     bool answered;
 } question;
 
 // An array of 12 questions (4 for each category), initialized in initialize_game
 // this may need to be a pointer if you want it set dynamically
-question questions[NUM_QUESTIONS];
+extern question questions[NUM_QUESTIONS];
 
 // Initializes the array of questions for the game
 extern void initialize_game(void);
