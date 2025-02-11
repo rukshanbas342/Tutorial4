@@ -151,21 +151,27 @@ void display_categories(void)
 // Displays the question for the category and dollar value
 void display_question(char *category, int value)
 {
+    // Copies the Provided category and converts it to lowercase using the to_lowercase function
     char category_lower[MAX_LEN];
     strcpy(category_lower, category);
     to_lowercase(category_lower);  // Convert input category to lowercase
 
+    // Iterates through all questions and checks if the category and value match
     for (int i = 0; i < NUM_QUESTIONS; i++) {
         char stored_category[MAX_LEN];
         strcpy(stored_category, questions[i].category);
-        to_lowercase(stored_category);  // Convert stored category to lowercase
+        // Convert stored category to lowercase
+        to_lowercase(stored_category);  
 
+        //Check if both the input category matches the questions category and the input value matches the questions point value
         if (strcmp(stored_category, category_lower) == 0 && questions[i].value == value) {
+            // If the question has already been answered it will tell the user to choose another question
             if (questions[i].answered) {
                 printf("This question has already been answered. Choose another.\n");
                 return;
             }
 
+            // If the question was nto answered, print the question for the player to answer
             printf("Question: %s\n", questions[i].question);
             return;  // Do NOT mark it answered here
         }
@@ -183,18 +189,22 @@ void to_lowercase(char *str) {
 // Returns true if any answer in the array matches the user input
 bool valid_answer(char *category, int value, char *answer)
 {
+    // Copies the Provided category and converts it to lowercase using the to_lowercase function
     char category_lower[MAX_LEN];
     strcpy(category_lower, category);
     to_lowercase(category_lower);  // Convert input category to lowercase
 
+    // Iterates through all questions and and converts to lowercase for comparison
     for (int i = 0; i < NUM_QUESTIONS; i++) {
         char stored_category[MAX_LEN];
         strcpy(stored_category, questions[i].category);
         to_lowercase(stored_category);  // Convert stored category to lowercase
 
+        // Check if the question matches both input category and value
         if (strcmp(stored_category, category_lower) == 0 && questions[i].value == value) {
             
-            // Strip "What is"/"Who is"
+            
+            // Removes common jeopardy phrases before comparing it to the correct answers
             char *parsed_answer = answer;
             if (strncasecmp(answer, "what is ", 8) == 0) {
                 parsed_answer += 8;
@@ -202,17 +212,22 @@ bool valid_answer(char *category, int value, char *answer)
                 parsed_answer += 7;
             }
 
+            // Copies the answer and converts it to lowercase for comparison
             char user_answer[MAX_ANSWER_LEN];
             strcpy(user_answer, parsed_answer);
             to_lowercase(user_answer);
 
+            // Itterates through all possible correct answers
             for (int j = 0; j < MAX_ANSWERS; j++) {
+                // Skips empty answers
                 if (strlen(questions[i].answers[j]) == 0) continue;  
 
+                // Copies and converts the answer to lowercase
                 char correct_answer[MAX_ANSWER_LEN];
                 strcpy(correct_answer, questions[i].answers[j]);
                 to_lowercase(correct_answer);
-
+                
+                // Compares the correct answer with the user input and returns true if they match
                 if (strcmp(correct_answer, user_answer) == 0) {
                     questions[i].answered = true;  // Mark the question as answered
                     return true;  
@@ -220,6 +235,7 @@ bool valid_answer(char *category, int value, char *answer)
             }
         }
     }
+    // If no correct answers are found, it will return false
     return false;
 }
 
