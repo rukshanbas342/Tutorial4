@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
         display_categories();
         
         // Show whose turn it is
-        printf("\n%s, it's your turn!\n", players[current_player_index].name);
+        printf("\n\033[1;33m%s, it's your turn!\033[0m\n", players[current_player_index].name);
 
         // Get valid category and point value
         get_category_and_value(category, &categoryValue);
