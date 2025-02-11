@@ -114,16 +114,33 @@ void initialize_game(void)
 void display_categories(void)
 {
     // Displays Categories as a header to the console
-    printf("Categories:\n");
+    printf("\n\n\e[1;31;4mCategories:\e[0m\n");
     // Iterates and displays each category in the categories array
     for (int i = 0; i < NUM_CATEGORIES; i++) {
-        printf("%s: ", categories[i]);
+        if(i==0){
+        printf("\033[1;34m%s: \033[0m", categories[i]);
+        }
+        else if(i==1){
+        printf("\033[1;35m%s:  \033[0m", categories[i]);
+        }else if(i==2){
+        printf("\033[1;36m%s:   \033[0m", categories[i]);
+        }
+       
         // Iterates and displays each question value for the current category that has not been answered
         for (int j = 0; j < NUM_QUESTIONS; j++) {
             // Compares the question category with the current category and checks if the question has not been answered
             if (strcmp(questions[j].category, categories[i]) == 0 && !questions[j].answered) {
                 // If both are true, it will print the questions point values
-                printf("%d ", questions[j].value);
+                if(questions[j].value == 100){
+                printf("\033[44m %d \033[0m", questions[j].value);
+               // printf("%d ", questions[j].value);
+                }else if(questions[j].value == 200){
+                printf("\033[42m %d \033[0m", questions[j].value);
+                }else if(questions[j].value == 300){
+                printf("\033[43m %d \033[0m", questions[j].value);
+                }else if(questions[j].value == 400){
+                printf("\033[41m %d \033[0m", questions[j].value);
+                }
             }
         }
         // Prints a new line
