@@ -206,6 +206,8 @@ bool valid_answer(char *category, int value, char *answer)
     return false;
 }
 
+
+
 // Returns true if the question has already been answered
 bool already_answered(char *category, int value)
 {
@@ -226,3 +228,4 @@ bool already_answered(char *category, int value)
     // If the question isn't found, it will assume that it is unanswered
     return false;
 }
+

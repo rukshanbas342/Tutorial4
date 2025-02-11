@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
         // Display available categories
         display_categories();
-
+        
         // Show whose turn it is
         printf("\n%s, it's your turn!\n", players[current_player_index].name);
 
@@ -140,3 +140,4 @@ void show_results(player *players, int num_players)
     }
     printf("-----------------------------------\n");
 }
+

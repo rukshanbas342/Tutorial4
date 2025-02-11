@@ -18,7 +18,7 @@
 #define MAX_ANSWERS 2
 
 // List of 3 categories as array of strings
-static char categories[NUM_CATEGORIES][MAX_LEN] = {
+static const char categories[NUM_CATEGORIES][MAX_LEN] = {
     "Programming", 
     "Algorithms", 
     "Databases"
@@ -28,7 +28,7 @@ static char categories[NUM_CATEGORIES][MAX_LEN] = {
 typedef struct {
     char category[MAX_LEN];
     char question[MAX_LEN];
-    char answer[MAX_ANSWERS][MAX_LEN];
+    char answers[MAX_ANSWERS][MAX_LEN];
     int value;
     bool answered;
 } question;
