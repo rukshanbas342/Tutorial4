@@ -53,6 +53,9 @@ int main(int argc, char *argv[])
         // Display available categories
         display_categories();
 
+        // Show whose turn it is
+        printf("\n%s, it's your turn!\n", players[current_player_index].name);
+
         // Get valid category and point value
         get_category_and_value(category, &categoryValue);
 
